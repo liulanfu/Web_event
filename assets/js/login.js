@@ -25,7 +25,7 @@ $(function () {
     $('#form_reg').on('submit', function (e) {
         e.preventDefault();
         $.ajax({
-            url: 'http://ajax.frontend.itheima.net/api/reguser',
+            url: '/api/reguser',
             type: "POST",
             data: {
                 username: $('#form_reg [name=username]').val(),
@@ -41,7 +41,25 @@ $(function () {
 
             }
         });
+    });
 
+    $('#form_login').on('submit', function (e) {
+        // console.log($(this).serialize());
+        e.preventDefault();
+        $.ajax({
+            url: '/api/login',
+            type: 'POST',
+            data: $(this).serialize(),
+            success(res) {
+                if (res.status !== 0) {
+                    return layer.msg(res.message);
+                }
+
+                localStorage.setItem('token', res.token);
+
+                location.href = '/index.html';
+            }
+        })
     });
 
 
