@@ -21,13 +21,14 @@ $(function () {
             type: 'POST',
             url: '/my/updatepwd',
             data: $(this).serialize(),
-            success: function (res) {
+            success: (res) => {
                 if (res.status !== 0) {
                     return layer.msg(res.message);
                 }
                 layer.msg('密码修改成功');
                 // 重置表单
-                $('.layui-form')[0].reset()
+                // $('.layui-form')[0].reset();
+                this.reset();
             }
         })
     })
